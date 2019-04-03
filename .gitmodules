@@ -1,0 +1,6 @@
+[submodule "salt/srv/salt"]
+	path = salt/srv/salt
+	url = https://github.com/dpdk-vbng-cp/salt-top.git
+[submodule "salt/srv/pillar"]
+	path = salt/srv/pillar
+	url = https://github.com/dpdk-vbng-cp/salt-pillar.git

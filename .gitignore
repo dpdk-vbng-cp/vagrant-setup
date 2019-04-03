@@ -1,0 +1,4 @@
+.vagrant
+
+salt/key/*.pub
+salt/key/*.pem
