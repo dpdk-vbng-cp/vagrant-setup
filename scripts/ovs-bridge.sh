@@ -4,7 +4,7 @@ OVS_BRIDGE=ovs-br0
 NAMESPACES="client-1 client-2"
 
 enable_forwarding() {
-    echo "Enabling forwarwarding."
+    echo "Enabling forwarding."
     echo 1 >&1 | sudo tee /proc/sys/net/ipv4/ip_forward
 }
 
