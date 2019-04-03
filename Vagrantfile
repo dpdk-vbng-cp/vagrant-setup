@@ -40,7 +40,9 @@ Vagrant.configure('2') do |config|
         mac: vm[:mac],
         ovs: true
 
-      vm_conf.vm.synced_folder 'salt/srv/', '/srv/'
+      vm_conf.vm.synced_folder 'salt/srv/', '/srv/', type: 'nfs',
+                                                     nfs_udp: false,
+                                                     nfs_version: 4
 
       vm_conf.vm.provision :salt do |salt|
         salt.minion_key = "salt/key/minion.pem"
