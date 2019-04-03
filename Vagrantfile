@@ -10,13 +10,14 @@ Vagrant.configure('2') do |config|
     libvirt.storage_pool_name = 'images'
   end
 
-  config.trigger.before :up, :destroy, only_on: :accel1 do |trigger|
+  config.trigger.before :up, :destroy, :halt, :provision, :reload, :resume, :suspend,
+                        only_on: :accel1 do |trigger|
     trigger.info = "Cleaning up bridge environment #{ENV['OVS_BRIDGE']} on host"
     trigger.run = { path: './scripts/ovs-bridge.sh',
                     args: 'delete'}
   end
 
-  config.trigger.before :up, only_on: :accel1 do |trigger|
+  config.trigger.before :up, :resume, :reload, :provision, only_on: :accel1 do |trigger|
     trigger.info = "Creating bridge environment #{ENV['OVS_BRIDGE']} on host"
     trigger.run = { path: './scripts/ovs-bridge.sh',
                     args: 'create'}
