@@ -9,6 +9,36 @@ Create local control plane setup with vagrant
    --gen-keys=$k; done`
 3. Create environment: `vagrant up`
 
+## Configuring authentication with chap
+Before starting the `loadbalancer` app, please configure to allow the authentication of the clients.
+
+Steps to configure the authentication procedure: 
+
+`sudo nano /etc/ppp/chap-secrets`
+
+paste the below in the chap file:
+
+`intel           *       bng_admin`
+
+## Configuring interfaces of client1 and client2
+
+Before starting the app please ssh to both of your client machine:
+in our case 
+
+`vagrant ssh accel1`
+`vagrant ssh accel2`
+
+Update the accel-ppp.conf file:
+
+`sudo nano /etc/accel-ppp.conf`
+
+check the interface for `pppoe` & `ipoe` funtion on the file and replace the interface name with your own interface:
+in our case interface = `eth1`
+save the file and restart the `accel-ppp` service.
+
+`sudo systemctl restart accel-ppp.service`
+
+
 ## Architecure
 
 ```
